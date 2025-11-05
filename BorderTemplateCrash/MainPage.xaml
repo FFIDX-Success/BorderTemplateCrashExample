@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:app="clr-namespace:BorderTemplateCrash"
+             x:Class="BorderTemplateCrash.MainPage">
+    <ContentPage.Resources>
+
+        <Color x:Key="TertiaryButtonTextColor">
+            #FFB3B3B3
+        </Color>
+        <Color x:Key="HoverIconControlColor">
+            #FFFFFFFF
+        </Color>
+        <Color x:Key="HoverTertiaryButtonControlColor">
+            #FF4F4F4F
+        </Color>
+        <Color x:Key="SecondaryButtonTextColor">
+            #FFFFFFFF
+        </Color>
+        <Color x:Key="DisabledTextColor">
+            #FF656565
+        </Color>
+        <Color x:Key="DisabledControlColor">
+            #FF333333
+        </Color>
+
+        <Style TargetType="app:NovaButton"
+               x:Key="BorderControlTemplate">
+            <Setter Property="ControlTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border x:Name="ControlBorderColor"
+                                StrokeThickness="1"
+                                Stroke="Transparent"
+                                StrokeShape="RoundRectangle 4"
+                                BackgroundColor="Transparent"
+                                HeightRequest="24">
+                            <Grid x:Name="Layout"
+                                  HorizontalOptions="Fill"
+                                  VerticalOptions="Fill"
+                                  ColumnDefinitions="Auto,1"
+                                  BackgroundColor="DarkGreen">
+                                <HorizontalStackLayout HorizontalOptions="Center"
+                                                       Padding="4,0">
+                                    <Image x:Name="ButtonImage"
+                                           Source="{TemplateBinding Source}"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center"
+                                           Aspect="AspectFit"
+                                           WidthRequest="16"
+                                           Margin="0,0,6,0"
+                                           HeightRequest="16" />
+                                    <Label x:Name="ButtonTextLabel"
+                                           Text="{TemplateBinding Text}"
+                                           VerticalOptions="Center"
+                                           HorizontalTextAlignment="Center" />
+                                </HorizontalStackLayout>
+                            </Grid>
+                            <!--<VisualStateManager.VisualStateGroups>
+                                <VisualStateGroupList>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal">
+                                            <VisualState.Setters>
+                                                <Setter Property="Label.TextColor"
+                                                        Value="{DynamicResource TertiaryButtonTextColor}"
+                                                        TargetName="ButtonTextLabel" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="PointerOver">
+                                            <VisualState.Setters>
+                                                <Setter Property="Label.TextColor"
+                                                        Value="{DynamicResource HoverIconControlColor}"
+                                                        TargetName="ButtonTextLabel" />
+                                                <Setter Property="Border.BackgroundColor"
+                                                        Value="{DynamicResource HoverTertiaryButtonControlColor}"
+                                                        TargetName="ControlBorderColor" />
+                                                <Setter Property="Border.Stroke"
+                                                        Value="{DynamicResource HoverTertiaryButtonControlColor}"
+                                                        TargetName="ControlBorderColor" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="Focused">
+                                            <VisualState.Setters>
+                                                <Setter Property="Label.TextColor"
+                                                        Value="{DynamicResource SecondaryButtonTextColor}"
+                                                        TargetName="ButtonTextLabel" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="Disabled">
+                                            <VisualState.Setters>
+                                                <Setter Property="Label.TextColor"
+                                                        Value="{DynamicResource DisabledTextColor}"
+                                                        TargetName="ButtonTextLabel" />
+                                                <Setter Property="Border.Stroke"
+                                                        Value="{DynamicResource DisabledControlColor}"
+                                                        TargetName="ControlBorderColor" />
+                                                <Setter Property="Border.BackgroundColor"
+                                                        Value="{DynamicResource DisabledControlColor}"
+                                                        TargetName="ControlBorderColor" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateGroupList>
+                            </VisualStateManager.VisualStateGroups>-->
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="app:NovaButton"
+               x:Key="NoBorderControlTemplate">
+            <Setter Property="ControlTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Grid x:Name="Layout"
+                              HorizontalOptions="Fill"
+                              VerticalOptions="Fill"
+                              ColumnDefinitions="Auto,1"
+                              HeightRequest="24"
+                              BackgroundColor="DarkBlue">
+                            <HorizontalStackLayout HorizontalOptions="Center"
+                                                   Padding="4,0">
+                                <Image x:Name="ButtonImage"
+                                       Source="{TemplateBinding Source}"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"
+                                       Aspect="AspectFit"
+                                       WidthRequest="16"
+                                       Margin="0,0,6,0"
+                                       HeightRequest="16" />
+                                <Label x:Name="ButtonTextLabel"
+                                       Text="{TemplateBinding Text}"
+                                       VerticalOptions="Center"
+                                       HorizontalTextAlignment="Center" />
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto, *">
+        <HorizontalStackLayout BackgroundColor="Blue">
+            <Button Text="Add stuff"
+                    Clicked="OnAddClicked" />
+            <Button Text="Add no border stuff"
+                    x:Name="NoBorderButton"
+                    Clicked="OnAddClicked"/>
+
+            <Label Text="Things to add: " />
+            <Slider x:Name="CountSlider"
+                    WidthRequest="200"
+                    Minimum="1"
+                    Maximum="1024" />
+            <Label Text="{Binding Source={x:Reference CountSlider}, Path=Value}" />
+
+            <Label Text="Depth: " />
+            <Slider x:Name="DepthSlider"
+                    WidthRequest="200"
+                    Minimum="0"
+                    Maximum="8" />
+            <Label Text="{Binding Source={x:Reference DepthSlider}, Path=Value}" />
+
+
+            <Button Text="Remove stuff"
+                    Clicked="OnRemoveClicked" />
+            <Button Text="Manipulate UI Elements"
+                    Clicked="OnInvalidateClicked" />
+        </HorizontalStackLayout>
+        <AbsoluteLayout x:Name="TheLayout"
+                        Grid.Row="1"
+                        BackgroundColor="DarkRed">
+        </AbsoluteLayout>
+    </Grid>
+
+</ContentPage>
